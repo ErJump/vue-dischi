@@ -1,5 +1,5 @@
 <template>
-  <div class="col-2 my_card p-3 d-flex flex-column align-items-center">
+  <div class="col-2 my_card p-3 d-flex flex-column align-items-center mx-3 mb-4">
     <img class="img-fluid mb-3" src="https://cdn2.jazztimes.com/2018/05/SteveGadd-800x723.jpg" alt="">
     <h3 class="text-white text-uppercase mb-2">Titolo</h3>
     <span>Artista</span>
