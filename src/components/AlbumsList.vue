@@ -1,12 +1,16 @@
 <template>
-  <div>
-    <h1>ciao io contengo gli albums</h1>
+  <div class="row">
+    <AlbumCard/>
   </div>
 </template>
 
 <script>
+import AlbumCard from './AlbumCard.vue';
 export default {
   name: 'AlbumsList',
+  components: {
+    AlbumCard,
+  }
 }
 </script>
 
