@@ -2,16 +2,19 @@
   <div class="row">
     <AlbumCard v-for="album in albums" :key="album.id"
     :object="album"/>
+    <AlbumLoader/>
   </div>
 </template>
 
 <script>
 import AlbumCard from './AlbumCard.vue';
+import AlbumLoader from './AlbumLoader.vue';
 import axios from 'axios';
 export default {
   name: 'AlbumsList',
   components: {
     AlbumCard,
+    AlbumLoader,
   },
   data() {
     return {
