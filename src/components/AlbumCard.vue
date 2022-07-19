@@ -1,15 +1,21 @@
 <template>
   <div class="col-2 my_card p-3 d-flex flex-column align-items-center mx-3 mb-4">
-    <img class="img-fluid mb-3" src="https://cdn2.jazztimes.com/2018/05/SteveGadd-800x723.jpg" alt="">
-    <h3 class="text-white text-uppercase mb-2">Titolo</h3>
-    <span>Artista</span>
-    <span>Anno</span>
+    <img class="img-fluid mb-3" :src="object.poster" :alt="object.poster">
+    <h3 class="text-white text-uppercase mb-2 fs-5 text-center">{{object.title}}</h3>
+    <span>{{object.author}}</span>
+    <span>{{object.year}}</span>
   </div>
 </template>
 
 <script>
 export default {
   name: 'AlbumCard',
+  props: {
+    object: {
+      type: Object,
+      required: true,
+    },
+  },
 }
 </script>
 
