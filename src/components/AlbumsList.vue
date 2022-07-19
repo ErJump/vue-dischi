@@ -1,8 +1,12 @@
 <template>
-  <div class="row">
-    <AlbumCard v-for="album in albums" :key="album.id"
-    :object="album"/>
-    <AlbumLoader/>
+  <div>
+    <div v-if="!loading" class="row">
+      <AlbumCard v-for="album in albums" :key="album.id"
+      :object="album"/>
+    </div>
+    <div v-else>
+      <AlbumLoader/>
+    </div>
   </div>
 </template>
 
@@ -19,6 +23,7 @@ export default {
   data() {
     return {
       albums: [],
+      loading: true,
     };
   },
   methods: {
@@ -27,6 +32,7 @@ export default {
         .then(response => {
           this.albums = response.data.response;
           console.log(this.albums);
+          this.loading = false;
         })
         .catch(error => {
           console.warn(error);
