@@ -22,11 +22,6 @@ export default {
       selected: '',
     }
   },
-  methods: {
-    log: function (string){
-      console.log(string);
-    }
-  }
 }
 </script>
 

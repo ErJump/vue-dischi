@@ -1,7 +1,7 @@
 <template>
   <div class="mb-5 d-flex flex-column">
     <label class="text-white">Filtra per artista</label>
-    <select class="px-3 py-2" v-model="selected">
+    <select class="px-3 py-2" v-model="selected" @change="$emit('selectAuthor', selected)">
       <option value="">All</option>
       <option v-for="(author, index) in authorsList" :key="index" :value="author">{{author}}</option>
     </select>
@@ -22,11 +22,6 @@ export default {
       selected: '',
     }
   },
-  methods: {
-    log: function (string){
-      console.log(string);
-    }
-  }
 }
 </script>
 

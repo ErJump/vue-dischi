@@ -2,10 +2,10 @@
   <div>
     <div class="d-flex">
       <SelectAlbums class="px-4" @select="setSelected" :genresList="genres"/>
-      <SelectArtists :authorsList="authors"/>
+      <SelectArtists :authorsList="authors" @selectAuthor="setSelectedAuthor"/>
     </div>
     <div v-if="!loading" class="row">
-      <AlbumCard v-for="album in filterInAlbumsforGenres" :key="album.id"
+      <AlbumCard v-for="album in filterInAlbumsforAuthors" :key="album.id"
       :object="album"/>
     </div>
     <div v-else>
@@ -33,7 +33,9 @@ export default {
       albums: [],
       loading: true,
       selected: "",
+      selectedAuthor: "",
       filteredAlbums: [],
+      filteredAlbumsAuthors: [],
       genres: [],
       authors: [],
     };
@@ -53,6 +55,9 @@ export default {
     },
     setSelected(selected) {
       this.selected = selected;
+    },
+    setSelectedAuthor(selected) {
+      this.selectedAuthor = selected;
     },
     pushGenres() {
       this.albums.forEach(album => {
@@ -75,7 +80,11 @@ export default {
   computed: {
     filterInAlbumsforGenres() {
       return this.albums.filter(album => album.genre.includes(this.selected));
+    },
+    filterInAlbumsforAuthors() {
+      return this.filterInAlbumsforGenres.filter(album => album.author.includes(this.selectedAuthor));
     }
+
   }
 }
 </script>
