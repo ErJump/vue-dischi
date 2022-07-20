@@ -1,18 +1,18 @@
 <template>
   <div class="mb-5 d-flex flex-column">
-    <label class="text-white">Filtra per genere</label>
-    <select class="px-3 py-2" v-model="selected" @change="$emit('select', selected)">
+    <label class="text-white">Filtra per artista</label>
+    <select class="px-3 py-2" v-model="selected">
       <option value="">All</option>
-      <option v-for="(genre, index) in genresList" :key="index" :value="genre">{{genre}}</option>
+      <option v-for="(author, index) in authorsList" :key="index" :value="author">{{author}}</option>
     </select>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'SelectAlbums',
+  name: 'SelectArtists',
   props:{
-    genresList: {
+    authorsList: {
       type: Array,
       required: true,
     },

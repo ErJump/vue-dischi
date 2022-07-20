@@ -1,6 +1,9 @@
 <template>
   <div>
-    <SelectAlbums @select="setSelected" :genresList="genres"/>
+    <div class="d-flex">
+      <SelectAlbums class="px-4" @select="setSelected" :genresList="genres"/>
+      <SelectArtists :authorsList="authors"/>
+    </div>
     <div v-if="!loading" class="row">
       <AlbumCard v-for="album in filterInAlbumsforGenres" :key="album.id"
       :object="album"/>
@@ -16,12 +19,14 @@ import AlbumCard from './AlbumCard.vue';
 import AlbumLoader from './AlbumLoader.vue';
 import axios from 'axios';
 import SelectAlbums from './SelectAlbums.vue';
+import SelectArtists from './SelectArtists.vue';
 export default {
   name: 'AlbumsList',
   components: {
     AlbumCard,
     AlbumLoader,
-    SelectAlbums
+    SelectAlbums,
+    SelectArtists,
 },
   data() {
     return {
@@ -30,6 +35,7 @@ export default {
       selected: "",
       filteredAlbums: [],
       genres: [],
+      authors: [],
     };
   },
   methods: {
@@ -38,6 +44,7 @@ export default {
         .then(response => {
           this.albums = response.data.response;
           this.pushGenres();
+          this.pushAuthors();
           this.loading = false;
         })
         .catch(error => {
@@ -51,6 +58,13 @@ export default {
       this.albums.forEach(album => {
         if (!this.genres.includes(album.genre)) {
           this.genres.push(album.genre);
+        }
+      });
+    },
+    pushAuthors() {
+      this.albums.forEach(album => {
+        if (!this.authors.includes(album.author)) {
+          this.authors.push(album.author);
         }
       });
     },
