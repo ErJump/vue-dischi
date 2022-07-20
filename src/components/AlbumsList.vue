@@ -1,8 +1,8 @@
 <template>
   <div>
-    <SelectAlbums/>
+    <SelectAlbums @select="setSelected"/>
     <div v-if="!loading" class="row">
-      <AlbumCard v-for="album in albums" :key="album.id"
+      <AlbumCard v-for="album in filterInAlbumsforGenres()" :key="album.id"
       :object="album"/>
     </div>
     <div v-else>
@@ -27,6 +27,8 @@ export default {
     return {
       albums: [],
       loading: true,
+      selected: "",
+      filteredAlbums: [],
     };
   },
   methods: {
@@ -35,12 +37,21 @@ export default {
         .then(response => {
           this.albums = response.data.response;
           console.log(this.albums);
+          console.log(this.filteredAlbums);
           this.loading = false;
         })
         .catch(error => {
           console.warn(error);
         });
     },
+    setSelected(selected) {
+      this.selected = selected;
+      console.log(this.selected);
+    },
+    filterInAlbumsforGenres() {
+      console.log([this.selected,this.albums]);
+      return this.albums.filter(album => album.genre.includes(this.selected));
+    }
   },
   created() {
     this.getAlbums();
