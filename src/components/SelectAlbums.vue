@@ -2,10 +2,7 @@
   <div class="mb-5">
     <select class="px-3 py-2" v-model="selected" @change="$emit('select', selected)">
       <option value="">All</option>
-      <option value="Rock">Rock</option>
-      <option value="Metal">Metal</option>
-      <option value="Pop">Pop</option>
-      <option value="Jazz">Jazz</option>
+      <option v-for="(genre, index) in genresList" :key="index" :value="genre">{{genre}}</option>
     </select>
   </div>
 </template>
@@ -13,6 +10,12 @@
 <script>
 export default {
   name: 'SelectAlbums',
+  props:{
+    genresList: {
+      type: Array,
+      required: true,
+    },
+  },
   data: function () {
     return {
       selected: '',

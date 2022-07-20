@@ -1,6 +1,6 @@
 <template>
   <div>
-    <SelectAlbums @select="setSelected"/>
+    <SelectAlbums @select="setSelected" :genresList="genres"/>
     <div v-if="!loading" class="row">
       <AlbumCard v-for="album in filterInAlbumsforGenres" :key="album.id"
       :object="album"/>
@@ -29,6 +29,7 @@ export default {
       loading: true,
       selected: "",
       filteredAlbums: [],
+      genres: [],
     };
   },
   methods: {
@@ -36,8 +37,7 @@ export default {
       axios.get('https://flynn.boolean.careers/exercises/api/array/music')
         .then(response => {
           this.albums = response.data.response;
-          console.log(this.albums);
-          console.log(this.filteredAlbums);
+          this.pushGenres();
           this.loading = false;
         })
         .catch(error => {
@@ -46,7 +46,13 @@ export default {
     },
     setSelected(selected) {
       this.selected = selected;
-      console.log(this.selected);
+    },
+    pushGenres() {
+      this.albums.forEach(album => {
+        if (!this.genres.includes(album.genre)) {
+          this.genres.push(album.genre);
+        }
+      });
     },
   },
   created() {
