@@ -1,5 +1,6 @@
 <template>
   <div>
+    <SelectAlbums/>
     <div v-if="!loading" class="row">
       <AlbumCard v-for="album in albums" :key="album.id"
       :object="album"/>
@@ -14,12 +15,14 @@
 import AlbumCard from './AlbumCard.vue';
 import AlbumLoader from './AlbumLoader.vue';
 import axios from 'axios';
+import SelectAlbums from './SelectAlbums.vue';
 export default {
   name: 'AlbumsList',
   components: {
     AlbumCard,
     AlbumLoader,
-  },
+    SelectAlbums
+},
   data() {
     return {
       albums: [],
